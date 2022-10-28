@@ -83,12 +83,16 @@ const Home: NextPage = ({
           <p>
             Keystone can be used as a data engine in Next.js server environments
             without even starting the Keystone server. This is powered by
-            Keystone&apos;s `getContext` API. However the GraphQL API will be
-            unavailable since we are not running the Keystone server and there
-            are some limitations around setting up Keystone&apos;s GraphQL API
-            within Next.js routes for now (we&apos;ll soon figure it out. 🤞).
-            So to CRUD data from the browser, we will need to manually write
+            Keystone&apos;s `getContext` API. However neither the Admin UI nor
+            the GraphQL API will be available since we are not starting the
+            Keystone server. To CRUD data from the server `getContext` can be
+            used but to CRUD data from the browser we will need to manually wire
             schema to Next.js API routes (refer `pages/api/user/findMany.ts`).
+          </p>
+          <p>
+            <a href="https://github.com/flexdinesh/keystone-in-next/blob/main/README.md">
+              Read the repo `Readme.md` for more info.
+            </a>
           </p>
 
           <ServerRenderedContent users={users} />

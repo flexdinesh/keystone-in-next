@@ -14,11 +14,6 @@ html {
   font-size: 1.25em;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 * {
   box-sizing: border-box;
 }

@@ -12,9 +12,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.0",
+    "@graphql-yoga/node": "^2.13.13",
     "@keystone-6/auth": "^5.0.0",
     "@keystone-6/core": "^3.0.1",
     "@keystone-6/fields-document": "^5.0.0",
+    "apollo-server-micro": "^3.10.4",
     "next": "12.3.1"
   },
   "devDependencies": {

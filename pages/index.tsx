@@ -25,6 +25,7 @@ const ServerRenderedContent = ({
 const ClientRenderedContent = ({}: {}) => {
   const [users, setUsers] = useState<Array<{ id: string; name: string }>>([]);
 
+  // Fetch users from REST api route
   useEffect(() => {
     fetch("/api/user/findMany", {
       method: "POST",
@@ -83,11 +84,18 @@ const Home: NextPage = ({
           <p>
             Keystone can be used as a data engine in Next.js server environments
             without even starting the Keystone server. This is powered by
-            Keystone&apos;s `getContext` API. However neither the Admin UI nor
-            the GraphQL API will be available since we are not starting the
-            Keystone server. To CRUD data from the server `getContext` can be
-            used but to CRUD data from the browser we will need to manually wire
-            schema to Next.js API routes (refer `pages/api/user/findMany.ts`).
+            Keystone&apos;s `getContext` API. However the Admin UI will not be
+            available since we are not starting the Keystone server. To CRUD
+            data from the server `getContext` can be used but to CRUD data from
+            the browser we will need to manually wire schema to Next.js API
+            routes (refer `pages/api/user/findMany.ts` or
+            `pages/api/apollo-graphql.ts`).
+          </p>
+          <p>
+            <em>
+              Note: Authentication and authenticated requests won&apos;t work
+              yet. We&apos;re experimenting around getting it to work.
+            </em>
           </p>
           <p>
             <a href="https://github.com/flexdinesh/keystone-in-next/blob/main/README.md">

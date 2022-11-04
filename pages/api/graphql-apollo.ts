@@ -11,6 +11,7 @@ const apolloServer = new ApolloServer({
 
 const startServer = apolloServer.start();
 
+// Use Keystone API to create GraphQL handler
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

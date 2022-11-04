@@ -9,6 +9,7 @@ export const config = {
   },
 };
 
+// Use Keystone API to create GraphQL handler
 export default createServer<{
   req: NextApiRequest;
   res: NextApiResponse;

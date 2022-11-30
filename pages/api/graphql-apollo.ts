@@ -5,7 +5,7 @@ import { keystoneContext } from "../../lib/keystone-context";
 
 const apolloServer = new ApolloServer({
   schema: keystoneContext.graphql.schema,
-  context: keystoneContext,
+  context: ({ req, res }) => keystoneContext.withRequest(req, res),
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
 });
 

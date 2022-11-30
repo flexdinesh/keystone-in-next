@@ -6,8 +6,6 @@ type User {
   name: String
   email: String
   password: PasswordState
-  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
   createdAt: DateTime
 }
 
@@ -29,7 +27,6 @@ input UserWhereInput {
   id: IDFilter
   name: StringFilter
   email: StringFilter
-  posts: PostManyRelationFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -72,12 +69,6 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
-input PostManyRelationFilter {
-  every: PostWhereInput
-  some: PostWhereInput
-  none: PostWhereInput
-}
-
 input DateTimeNullableFilter {
   equals: DateTime
   in: [DateTime!]
@@ -105,15 +96,7 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForUpdateInput
   createdAt: DateTime
-}
-
-input PostRelateToManyForUpdateInput {
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
 }
 
 input UserUpdateArgs {
@@ -125,133 +108,7 @@ input UserCreateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForCreateInput
   createdAt: DateTime
-}
-
-input PostRelateToManyForCreateInput {
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
-}
-
-type Post {
-  id: ID!
-  title: String
-  content: Post_content_Document
-  author: User
-  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0): [Tag!]
-  tagsCount(where: TagWhereInput! = {}): Int
-}
-
-type Post_content_Document {
-  document(hydrateRelationships: Boolean! = false): JSON!
-}
-
-input PostWhereUniqueInput {
-  id: ID
-}
-
-input PostWhereInput {
-  AND: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  NOT: [PostWhereInput!]
-  id: IDFilter
-  title: StringFilter
-  author: UserWhereInput
-  tags: TagManyRelationFilter
-}
-
-input TagManyRelationFilter {
-  every: TagWhereInput
-  some: TagWhereInput
-  none: TagWhereInput
-}
-
-input PostOrderByInput {
-  id: OrderDirection
-  title: OrderDirection
-}
-
-input PostUpdateInput {
-  title: String
-  content: JSON
-  author: UserRelateToOneForUpdateInput
-  tags: TagRelateToManyForUpdateInput
-}
-
-input UserRelateToOneForUpdateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: Boolean
-}
-
-input TagRelateToManyForUpdateInput {
-  disconnect: [TagWhereUniqueInput!]
-  set: [TagWhereUniqueInput!]
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
-}
-
-input PostUpdateArgs {
-  where: PostWhereUniqueInput!
-  data: PostUpdateInput!
-}
-
-input PostCreateInput {
-  title: String
-  content: JSON
-  author: UserRelateToOneForCreateInput
-  tags: TagRelateToManyForCreateInput
-}
-
-input UserRelateToOneForCreateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-}
-
-input TagRelateToManyForCreateInput {
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
-}
-
-type Tag {
-  id: ID!
-  name: String
-  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
-}
-
-input TagWhereUniqueInput {
-  id: ID
-}
-
-input TagWhereInput {
-  AND: [TagWhereInput!]
-  OR: [TagWhereInput!]
-  NOT: [TagWhereInput!]
-  id: IDFilter
-  name: StringFilter
-  posts: PostManyRelationFilter
-}
-
-input TagOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-}
-
-input TagUpdateInput {
-  name: String
-  posts: PostRelateToManyForUpdateInput
-}
-
-input TagUpdateArgs {
-  where: TagWhereUniqueInput!
-  data: TagUpdateInput!
-}
-
-input TagCreateInput {
-  name: String
-  posts: PostRelateToManyForCreateInput
 }
 
 """
@@ -266,18 +123,6 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
-  createPost(data: PostCreateInput!): Post
-  createPosts(data: [PostCreateInput!]!): [Post]
-  updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
-  updatePosts(data: [PostUpdateArgs!]!): [Post]
-  deletePost(where: PostWhereUniqueInput!): Post
-  deletePosts(where: [PostWhereUniqueInput!]!): [Post]
-  createTag(data: TagCreateInput!): Tag
-  createTags(data: [TagCreateInput!]!): [Tag]
-  updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
-  updateTags(data: [TagUpdateArgs!]!): [Tag]
-  deleteTag(where: TagWhereUniqueInput!): Tag
-  deleteTags(where: [TagWhereUniqueInput!]!): [Tag]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -304,12 +149,6 @@ type Query {
   users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0): [User!]
   user(where: UserWhereUniqueInput!): User
   usersCount(where: UserWhereInput! = {}): Int
-  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0): [Post!]
-  post(where: PostWhereUniqueInput!): Post
-  postsCount(where: PostWhereInput! = {}): Int
-  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0): [Tag!]
-  tag(where: TagWhereUniqueInput!): Tag
-  tagsCount(where: TagWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
@@ -340,9 +179,10 @@ type KeystoneAdminUIListMeta {
   pageSize: Int!
   labelField: String!
   fields: [KeystoneAdminUIFieldMeta!]!
+  groups: [KeystoneAdminUIFieldGroupMeta!]!
   initialSort: KeystoneAdminUISort
   isHidden: Boolean!
-  isSingleton: Boolean
+  isSingleton: Boolean!
 }
 
 type KeystoneAdminUIFieldMeta {
@@ -380,6 +220,7 @@ enum KeystoneAdminUIFieldMetaListViewFieldMode {
 
 type KeystoneAdminUIFieldMetaItemView {
   fieldMode: KeystoneAdminUIFieldMetaItemViewFieldMode
+  fieldPosition: KeystoneAdminUIFieldMetaItemViewFieldPosition
 }
 
 enum KeystoneAdminUIFieldMetaItemViewFieldMode {
@@ -388,9 +229,20 @@ enum KeystoneAdminUIFieldMetaItemViewFieldMode {
   hidden
 }
 
+enum KeystoneAdminUIFieldMetaItemViewFieldPosition {
+  form
+  sidebar
+}
+
 enum QueryMode {
   default
   insensitive
+}
+
+type KeystoneAdminUIFieldGroupMeta {
+  label: String!
+  description: String
+  fields: [KeystoneAdminUIFieldMeta!]!
 }
 
 type KeystoneAdminUISort {

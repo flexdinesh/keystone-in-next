@@ -110,7 +110,7 @@ const Home: NextPage = ({
             `pages/api/graphql-apollo.ts`).
           </p>
           <p>
-            <a href="https://github.com/flexdinesh/keystone-in-next/blob/main/README.md">
+            <a href="https://github.com/flexdinesh/keystone-in-next">
               Read the repo `Readme.md` for more info.
             </a>
           </p>

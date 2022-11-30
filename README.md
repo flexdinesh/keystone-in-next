@@ -6,7 +6,7 @@
 
 ## Notes
 
-- The `keystone.db` committed with this repo has my login setup. Email is `dinesh@yopmail.com`, password is `passw0rd`.
+- The `keystone.db` committed with this repo has my login setup. Demo user email is `bruce@dc.com`, password is `passw0rd`.
 - You start your Next.js app by running `yarn dev`. You don't need to start the keystone server since `getContext` will work without starting the Keystone server.
 - In local, when you update your Keystone schema, you should run `yarn keystone:dev` or `yarn keystone:build` to rebuild your `schema.graphql` and `schema.prisma` files.
 - When you deploy your Next.js app, just remember to run `yarn keystone:build` once to make sure you have the latest schema built for `getContext` API within your Next.js app.

@@ -5,12 +5,21 @@ import type { Lists } from ".keystone/types";
 
 const permissions = {
   authenticatedUser: ({ session }: any) => !!session?.data,
+  public: () => true,
+  readOnly: {
+    operation: {
+      query: () => true,
+      create: () => false,
+      update: () => false,
+      delete: () => false,
+    },
+  },
 };
 
 export const lists: Lists = {
   User: list({
-    access: allowAll,
-    // this is the fields for our User list
+    // readonly for demo purpose
+    access: permissions.readOnly,
     fields: {
       name: text({ validation: { isRequired: true } }),
       email: text({
@@ -18,8 +27,6 @@ export const lists: Lists = {
         isIndexed: "unique",
         access: {
           read: permissions.authenticatedUser,
-          create: permissions.authenticatedUser,
-          update: permissions.authenticatedUser,
         },
       }),
       password: password({ validation: { isRequired: true } }),

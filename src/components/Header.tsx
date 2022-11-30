@@ -93,11 +93,11 @@ export function Header() {
   return !user ? (
     <div style={{ display: "flex", gap: "1em" }}>
       <label>
-        email: <input name="email" type="email" ref={emailRef}></input>
+        email: <input name="email" type="email" ref={emailRef} placeholder="bruce@dc.com"></input>
       </label>
       <label>
         password:{" "}
-        <input name="password" type="password" ref={passwordRef}></input>
+        <input name="password" type="password" ref={passwordRef} placeholder="passw0rd"></input>
       </label>
       <button onClick={login}>login</button>
     </div>

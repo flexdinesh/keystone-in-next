@@ -2,6 +2,7 @@ node_modules
 .keystone
 .keystone/admin
 *.log
+*.env
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 

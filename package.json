@@ -6,8 +6,9 @@
     "keystone:dev": "keystone dev",
     "keystone:start": "keystone start",
     "keystone:build": "keystone build",
+    "next:build": "next build",
     "dev": "next dev -p 4000",
-    "build": "next build",
+    "build": "yarn keystone:build && yarn next build",
     "start": "next start",
     "lint": "next lint"
   },

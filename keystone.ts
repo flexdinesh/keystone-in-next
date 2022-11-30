@@ -1,7 +1,6 @@
 import { config } from "@keystone-6/core";
 import path from "path";
-import { KeystoneContext } from "@keystone-6/core/types";
-import { TypeInfo } from ".keystone/types";
+import { Context } from ".keystone/types";
 import { lists } from "./schema";
 import { withAuth, session } from "./auth";
 
@@ -27,7 +26,7 @@ const upsertUser = async ({
   context,
   user,
 }: {
-  context: KeystoneContext<TypeInfo>;
+  context: Context;
   user: { email: string; password: string; name: string };
 }) => {
   const userInDb = await context.db.User.findOne({
@@ -48,8 +47,8 @@ export default withAuth(
     db: {
       provider: "sqlite",
       url: `file:${dbFilePath}`,
-      onConnect: async (context) => {
-        const sudoContext = context.sudo() as KeystoneContext<TypeInfo>;
+      onConnect: async (context: Context) => {
+        const sudoContext = context.sudo();
         demoUsers.forEach((u) => upsertUser({ context: sudoContext, user: u }));
       },
     },

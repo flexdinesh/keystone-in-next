@@ -1,5 +1,4 @@
 import { list } from "@keystone-6/core";
-import { allowAll } from "@keystone-6/core/access";
 import { text, password, timestamp } from "@keystone-6/core/fields";
 import type { Lists } from ".keystone/types";
 

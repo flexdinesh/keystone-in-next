@@ -1,5 +1,7 @@
 # Keystone and Next.js in a single server
 
+> Moved to [github.com/keystonejs/keystone/tree/main/examples/nextjs-keystone](https://github.com/keystonejs/keystone/tree/main/examples/nextjs-keystone)
+
 - Keystone can be used within Next.js server environments without even starting the Keystone server using `getContext` API.
 - However since we don't start the Keystone server we won't have access to Keystone's Admin UI.
 - You can use the generated Keystone GraphQL schema to setup your own GraphQL API as a Next.js route. (refer to [/pages/api/graphql-apollo.ts](/pages/api/graphql-apollo.ts))
